@@ -1,0 +1,12 @@
+{
+  "admin": [
+    {
+      "key": "dashboard",
+      "name": "Dashboard"
+    },
+    {
+      "key": "settings",
+      "name": "Settings"
+    }
+  ]
+}
