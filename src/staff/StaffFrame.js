@@ -1,68 +1,60 @@
 import React from 'react';
 import {Layout, Menu} from 'antd';
+import ActionContentProvider from "./ActionContentProvider";
+import {ReactNode} from "react";
 
-const { Header, Sider, Content } = Layout;
-
-//import the staff_features.json file
-const staffFeatures = require('./staff_feature.json');
+const {Header, Sider, Content} = Layout;
 
 class StaffFrame extends React.Component {
-    state = {
+    state : {
+        role: String,
+        selectedAction: String,
+    } = {
         role: 'admin', // this is just an example, you should get the current user's role from backend
         selectedAction: '',
     };
 
     constructor({role, props}) {
         super(props);
-        if(role !== undefined) {
+        if (role !== undefined) {
             this.state.role = role;
         }
         this.getMenuContent(this.state.role, this.handleMenuClick);
-
     }
 
-    getMenuContent(role, handleMenuClick) {
+    getMenuContent(role : String, handleMenuClick : Function) : void {
+        this.provider = new ActionContentProvider();
         // Render menu items based on role
-        if(staffFeatures[role] !== undefined) {
-            let features = staffFeatures[role];
-            let menuItems = features.map((feature) => {
-                return (
-                    <Menu.Item key={feature.key} onClick={handleMenuClick}>
-                        {feature.name}
-                    </Menu.Item>
-                );
-            });
-            this.menuItems = menuItems;
-            this.firstkey = features[0].key;
+        let menuContent = this.provider.getMenuContent(role, handleMenuClick);
+        if (menuContent !== null) {
+            this.menuItems = menuContent.menuItems;
+            this.firstkey = menuContent.firstKey;
+            // eslint-disable-next-line react/no-direct-mutation-state
             this.state.selectedAction = this.firstkey;
+            this.renderActionContent();
         }
     }
 
-    handleMenuClick = (e) => {
-        this.setState({ selectedAction: e.key });
+    handleMenuClick = (e) : void => {
+        this.setState({selectedAction: e.key});
+        this.renderActionContent();
     };
+
     handleLogout() {
 
     }
 
-    renderActionContent() {
-        switch (this.state.selectedAction) {
-            case 'dashboard':
-                return <div>Dashboard content...</div>;
-            case 'settings':
-                return <div>Settings content...</div>;
-            // add more cases as your needs...
-            default:
-                return <div>Select a function...</div>;
-        }
+    renderActionContent() : ReactNode {
+        const ActionContent = this.provider.renderActionContent(this.state.role, this.state.selectedAction);
+        return <ActionContent/>;
     }
 
-    render() {
-        const { role } = this.state;
+    render() : ReactNode {
+        const {role} = this.state;
         return (
             <Layout>
                 <Header className="header">
-                    <div className="logo" />
+                    <div className="logo"/>
                     <Menu
                         theme="dark" mode="horizontal"
                         style={{float: 'right'}}
@@ -78,16 +70,16 @@ class StaffFrame extends React.Component {
                         <Menu
                             mode="inline"
                             defaultSelectedKeys={[this.firstkey]}
-                            style={{ height: '100vh', borderRight: 0 }}
+                            style={{height: '100vh', borderRight: 0}}
                         >
                             {this.menuItems}
                         </Menu>
                     </Sider>
-                    <Layout style={{ padding: '0 24px 24px' }}>
+                    <Layout style={{padding: '24px 24px 24px'}}>
                         <Content
                             className="site-layout-background"
                             style={{
-                                padding: 24,
+                                padding: 1,
                                 margin: 0,
                                 minHeight: 280,
                             }}

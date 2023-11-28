@@ -2,11 +2,15 @@
   "admin": [
     {
       "key": "dashboard",
-      "name": "Dashboard"
+      "name": "Dashboard",
+      "icon": "fa fa-dashboard",
+      "node": "AdminDashboard"
     },
     {
       "key": "settings",
-      "name": "Settings"
+      "name": "Settings",
+      "icon": "fa fa-dashboard",
+      "node": "AdminSetting"
     }
   ]
 }
