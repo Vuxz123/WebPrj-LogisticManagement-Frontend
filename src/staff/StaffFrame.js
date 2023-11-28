@@ -36,6 +36,7 @@ class StaffFrame extends React.Component {
     }
 
     handleMenuClick = (e) : void => {
+        if(this.state.selectedAction === e.key) return;
         this.setState({selectedAction: e.key});
         this.renderActionContent();
     };

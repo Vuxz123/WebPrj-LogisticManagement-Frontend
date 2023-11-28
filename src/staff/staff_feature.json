@@ -11,6 +11,11 @@
       "name": "Settings",
       "icon": "fa fa-dashboard",
       "node": "AdminSetting"
+    },
+    {
+      "key": "permissions",
+      "name": "Permissions",
+      "icon": "fa fa-dashboard"
     }
   ]
 }

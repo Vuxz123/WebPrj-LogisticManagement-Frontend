@@ -38,20 +38,28 @@ class ActionContentProvider {
     }
 
     renderActionContent(role : String, selectedAction : String) : ReactNode {
-        return this.importActionContentModule(role, selectedAction).default;
+        const module = this.importActionContentModule(role, selectedAction);
+        if(module !== undefined) {
+            return module.default;
+        } else {
+            console.log('Module not found: Cannot render the action : \'' + selectedAction + '\' for role: \'' + role + '\'');
+            throw new Error('Module not found: Cannot render the action : \'' + selectedAction + '\' for role: \'' + role + '\'');
+        }
     }
 
     importActionContentModule(role : String, selectedAction : String) : NodeModule {
         const features = this.staffFeatures[role];
         const className : String = features.find((feature) => feature.key === selectedAction).node;
+        if(className === undefined) {
+            console.log('WARNING: the node is undefined of action : \'' + selectedAction + '\' for role: \'' + role + '\'')
+            return modules.get('./PlaceHolder.js');
+        }
         const path : String = './' + role + '/' + className + '.js';
         if(modules.has(path)) {
-
             return modules.get(path);
-
         }else {
-            console.log('Module not found: ' + path);
-            throw new Error('Module not found: ' + path);
+            console.log('Module not found: Cannot render the action : \'' + selectedAction + '\' for role: \'' + role + '\'');
+            return modules.get('./PlaceHolder.js');
         }
     }
 }
