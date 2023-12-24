@@ -1,7 +1,9 @@
 import React from 'react';
 import {Layout, Menu} from 'antd';
 import ActionContentProvider from "./ActionContentProvider";
+import resolveName from "./StaffNameResolver";
 import {ReactNode} from "react";
+import {LogoutOutlined, MenuOutlined} from "@ant-design/icons";
 
 const {Header, Sider, Content} = Layout;
 
@@ -10,8 +12,27 @@ class StaffFrame extends React.Component {
         role: String,
         selectedAction: String,
     } = {
-        role: 'admin', // this is just an example, you should get the current user's role from backend
-        selectedAction: '',
+        role: 'p-c_head', // this is just an example, you should get the current user's role from backend
+        selectedAction: 0,
+    };
+
+    menuSelected : number = 1;
+
+    componentDidMount() {
+        const media = window.matchMedia('(max-width: 800px)');
+        media.addEventListener('change', this.handleMediaQueryChange);
+    }
+
+    componentWillUnmount() {
+        const media = window.matchMedia('(max-width: 800px)');
+        media.removeEventListener('change', this.handleMediaQueryChange);
+    }
+
+    handleMediaQueryChange = () => {
+        const media = window.matchMedia('(max-width: 800px)');
+        this.setState({
+            isSmallScreen: media.matches,
+        });
     };
 
     constructor({role, props}) {
@@ -28,6 +49,7 @@ class StaffFrame extends React.Component {
         let menuContent = this.provider.getMenuContent(role, handleMenuClick);
         if (menuContent !== null) {
             this.menuItems = menuContent.menuItems;
+            this.dropdown = menuContent.dropdown;
             this.firstkey = menuContent.firstKey;
             // eslint-disable-next-line react/no-direct-mutation-state
             this.state.selectedAction = this.firstkey;
@@ -45,9 +67,9 @@ class StaffFrame extends React.Component {
 
     }
 
-    renderActionContent() : ReactNode {
+    renderActionContent(isSmallScreen) : ReactNode {
         const ActionContent = this.provider.renderActionContent(this.state.role, this.state.selectedAction);
-        return <ActionContent/>;
+        return <ActionContent small={isSmallScreen}/>;
     }
 
     render() : ReactNode {
@@ -55,37 +77,44 @@ class StaffFrame extends React.Component {
         return (
             <Layout>
                 <Header className="header">
-                    <div className="logo"/>
-                    <Menu
-                        theme="dark" mode="horizontal"
-                        style={{float: 'right'}}
-                    >
-                        <div style={{width: 'fit-content'}}>Role: {role}</div>
-                        <Menu.Item key="3" onClick={this.handleLogout}>
+                    <Menu theme="dark" mode="horizontal" >
+                        {
+                            this.state.isSmallScreen ? (
+                                <Menu.SubMenu key="dropdown" icon={(<MenuOutlined/>)} defaultSelectedKeys={[this.state.selectedAction]} selectedKeys={[this.state.selectedAction]}>
+                                    {this.menuItems}
+                                </Menu.SubMenu>
+                            ) : null
+                        }
+                        <div style={{margin: '0 10px 0 10px'}}>Role: {resolveName(role)}</div>
+                        <Menu.Item key="3" onClick={this.handleLogout} title="Đăng xuất" icon={<LogoutOutlined/>}>
                             Đăng xuất
                         </Menu.Item>
                     </Menu>
                 </Header>
                 <Layout>
-                    <Sider width={200} className="site-layout-background">
-                        <Menu
-                            mode="inline"
-                            defaultSelectedKeys={[this.firstkey]}
-                            style={{height: '100vh', borderRight: 0}}
-                        >
-                            {this.menuItems}
-                        </Menu>
-                    </Sider>
-                    <Layout style={{padding: '24px 24px 24px'}}>
+                    {!this.state.isSmallScreen ? (
+                        <Sider width={200} >
+                            <Menu
+                                mode="inline"
+                                defaultSelectedKeys={[this.state.selectedAction]}
+                                selectedKeys={[this.state.selectedAction]}
+                                style={{height: '100vh', borderRight: 0}}
+                            >
+                                {this.menuItems}
+                            </Menu>
+                        </Sider>
+                    ) : null}
+                    <Layout style={{padding: '10px'}}>
                         <Content
-                            className="site-layout-background"
                             style={{
-                                padding: 1,
+                                padding: '10px',
                                 margin: 0,
                                 minHeight: 280,
+                                background: "white",
+                                borderRadius: "5px",
                             }}
                         >
-                            {this.renderActionContent()}
+                            {this.renderActionContent(this.state.isSmallScreen)}
                         </Content>
                     </Layout>
                 </Layout>

@@ -1,4 +1,4 @@
-import {Menu} from "antd";
+import {Dropdown, Menu} from "antd";
 import React from "react";
 import staffFeatures from './staff_feature.json';
 import {ReactNode} from "react";
@@ -11,13 +11,11 @@ function importAll(r) {
 
 const modules = importAll(require.context('./ac/', true, /\.js$/));
 
-console.log(modules)
-
 class ActionContentProvider {
     constructor() {
         this.staffFeatures = staffFeatures;
     }
-    getMenuContent(role, handleMenuClick) {
+    getMenuContent(role, handleMenuClick): ReactNode {
         // Render menu items based on role
         if (this.staffFeatures[role] !== undefined) {
             let features = this.staffFeatures[role];
@@ -28,8 +26,16 @@ class ActionContentProvider {
                     </Menu.Item>
                 );
             });
+            let dropdown = features.map((feature) => {
+                return (
+                    <Dropdown.Button key={feature.key} onClick={handleMenuClick}>
+                        {feature.name}
+                    </Dropdown.Button>
+                );
+            })
             let firstKey = features[0].key;
             return {
+                dropdown: dropdown,
                 menuItems: menuItems,
                 firstKey: firstKey,
             };

@@ -17,5 +17,82 @@
       "name": "Permissions",
       "icon": "fa fa-dashboard"
     }
+  ],
+
+  "p-s_clerk": [
+    {
+      "key": "receive",
+      "name": "Receive",
+      "icon": "fa fa-dashboard",
+      "node": "Receive"
+    },
+    {
+      "key": "create_s",
+      "name": "Create Shipment",
+      "icon": "fa fa-dashboard",
+      "node": "CreateShipment"
+    },
+    {
+      "key": "confirm_s",
+      "name": "Confirm Shipment",
+      "icon": "fa fa-dashboard",
+      "node": "ConfirmShipment"
+    },
+    {
+      "key": "create_d",
+      "name": "Create Delivery",
+      "node": "CreateDelivery"
+    },
+    {
+      "key": "confirm_d",
+      "name": "Confirm Delivery",
+      "node": "ConfirmDelivery"
+    },
+    {
+      "key": "return",
+      "name": "Return",
+      "node": "Return"
+    },
+    {
+      "key": "report",
+      "name": "Report",
+      "node": "Report"
+    }
+  ],
+  "p-c_staff": [
+    {
+      "key": "receive_shipment",
+      "name": "Receive Shipment",
+      "node": "ReceiveShipment"
+    },
+    {
+      "key": "create_shipment",
+      "name": "Create Shipment",
+      "node": "CreateShipment"
+    }
+  ],
+  "p-c_head": [
+    {
+      "key": "create_account",
+      "name": "Account Management",
+      "node": "CreateAccount"
+    },
+    {
+      "key": "Statistics",
+      "name": "Statistics",
+      "node": "Statistics"
+    }
+  ],
+  "p-s_head": [
+    {
+      "key": "create_account",
+      "name": "Account Management",
+      "node": "CreateAccount"
+    },
+    {
+      "key": "Statistics",
+      "name": "Statistics",
+      "node": "Statistics"
+    }
   ]
 }
