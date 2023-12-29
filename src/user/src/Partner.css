@@ -1,0 +1,21 @@
+div {
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+div img {
+    width: 20rem;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.partner-wrapper {
+    padding-top: 2.5rem;
+    padding-bottom: 3rem;
+    background-color: #F9FAFC;
+}
+

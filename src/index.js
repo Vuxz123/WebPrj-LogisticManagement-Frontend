@@ -5,7 +5,9 @@ import {
     createBrowserRouter,
     RouterProvider,
 } from "react-router-dom";
+import "./index.css"
 import {Staff} from "./staff";
+import App from "./user/App"
 
 const router = createBrowserRouter([
     {
@@ -14,7 +16,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/",
-        element: <div>Home</div>,
+        element: <App/>,
     },
 ]);
 
