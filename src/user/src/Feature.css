@@ -31,3 +31,45 @@ h1 {
     width: 60%;
     margin-left: 12rem;
 }
+
+
+
+.feature-warpper2 {
+    width: 50vw;
+    height: 70vh;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    margin: 10px 0 10px 10px;
+}
+
+.feature-info {
+    display: flex;
+    justify-content: flex-start;
+    margin-right: auto;
+    flex-direction: column;
+    flex: 30%;
+}
+
+.feature-content {
+    height: 100%;
+    margin-left: 10px;
+    border-left: #131110 1px solid;
+    flex: 70%;
+    display: block;
+}
+
+.feature-progress {
+    margin: 10px;
+    width: auto;
+    height: max-content;
+    border: #131110 1px solid;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y:scroll;
+}
+
+ul{overflow:hidden; }
+

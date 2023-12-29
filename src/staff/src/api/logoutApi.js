@@ -11,13 +11,16 @@ export default async function logout() {
     }
   }).then(res => {
       console.log(res)
-      if (res.status === 204) {
+      if (res.status === 200) {
         localStorage.removeItem('token');
         localStorage.removeItem('role');
-      } else {
-        toast.error('Có lỗi xảy ra');
+      } else if (res.status === 204) {
+          toast.warn("Bạn đã từng đăng nhập, điều này có nghĩa là đã có lỗi gì đó sảy ra!")
+          localStorage.removeItem('token');
+          localStorage.removeItem('role');
       }
   }).catch(err => {
+      console.error(err)
       toast.error('Có lỗi xảy ra');
   });
 }

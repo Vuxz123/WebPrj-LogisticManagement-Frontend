@@ -1,7 +1,5 @@
 import React from "react";
-import {API_URL} from "../../Util";
-import {toast} from "react-toastify";
-import {Button, Divider, Input, Spin, Table, Typography} from "antd";
+import {Button, Divider, Spin, Table, Typography} from "antd";
 
 class Report extends React.Component {
 
@@ -65,14 +63,14 @@ class Report extends React.Component {
                 <Typography.Title level={3}>Thống kê</Typography.Title>
                 <Spin spinning={this.state.data === null}>
                     <Table
-                        dataSource={this.state.data.filter((item, index) => 'fail' in item)}
+                        dataSource={this.state.data != null ? this.state.data.filter((item, index) => 'fail' in item) : []}
                         columns={columns1}
                         rowKey={record => record.id}
                         pagination={true}
                     />
                     <Divider/>
                     <Table
-                        dataSource={this.state.data.filter((item, index) => 'success' in item)}
+                        dataSource={this.state.data != null ? this.state.data.filter((item, index) => 'success' in item) : []}
                         columns={columns2}
                         rowKey={record => record.id}
                         pagination={true}

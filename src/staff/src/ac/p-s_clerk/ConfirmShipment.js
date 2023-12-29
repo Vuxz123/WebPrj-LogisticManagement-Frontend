@@ -1,14 +1,12 @@
 import React from "react";
-import {API_URL} from "../../Util";
 import {toast} from "react-toastify";
 import {Button, Input, Typography} from "antd";
+import {confirmShipment} from "../../api/psStaffApi";
 
 async function onSubmit(maDonHang: string) {
     console.log("submit");
 
-    await fetch(API_URL + '/shipments/' + maDonHang +'/create-shipment/', {
-        method: 'POST',
-    })
+    await confirmShipment(maDonHang)
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
@@ -31,7 +29,7 @@ class ConfirmShipment extends React.Component {
     render() {
         return (
             <div>
-                <Typography.Title level={3}>Xác nhận hàng đã chuyển đến tay người nhận</Typography.Title>
+                <Typography.Title level={3}>Xác nhận hàng đã đến điểm giao dịch</Typography.Title>
                 <div style={{
                     width: '50%',
                     display: 'flex',

@@ -51,7 +51,7 @@ function Header() {
                 {/*right side*/}
                 <div className={"flexCenter header-right"}>
                     <div className={"image-container"}>
-                        <img src={"./header-img.png"} alt={"header-image"}/>
+                        <img src={"./header-img.png"} alt={"header"}/>
                     </div>
                 </div>
             </div>

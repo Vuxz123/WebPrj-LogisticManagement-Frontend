@@ -23,9 +23,9 @@ export class Staff extends React.Component {
     pages: any = (page: number, {role}) => {
         switch (page) {
             case 0:
-                return <Login onLoginComplete={this.onLoginComplete}/>;
+                return <Login onLoginComplete={this.onLoginComplete.bind(this)}/>;
             case 1:
-                return <StaffFrame role={role} onLogout={this.onLogout}/>;
+                return <StaffFrame role={role} onLogout={this.onLogout.bind(this)}/>;
             default:
                 return <div>404</div>
         }

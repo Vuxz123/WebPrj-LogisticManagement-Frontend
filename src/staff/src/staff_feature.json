@@ -15,10 +15,10 @@
 
   "p-s_clerk": [
     {
-      "key": "receive",
-      "name": "Receive",
+      "key": "make_s",
+      "name": "Make Shipment",
       "icon": "fa fa-dashboard",
-      "node": "Receive"
+      "node": "MakeShipment"
     },
     {
       "key": "create_s",

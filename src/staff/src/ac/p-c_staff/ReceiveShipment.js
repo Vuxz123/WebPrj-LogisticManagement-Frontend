@@ -1,14 +1,12 @@
 import React from "react";
-import {API_URL} from "../../Util";
 import {toast} from "react-toastify";
-import {Button, Input, Typography} from "antd";
+import {Button, Form, Input, Select, Typography} from "antd";
+import {confirmShipment} from "../../api/pcStaffApi";
 
-async function onSubmit(maDonHang: string) {
+async function onSubmit(maDonHang: string, type: string) {
     console.log("submit");
 
-    await fetch(API_URL + '/shipments/' + maDonHang +'/create-shipment/', {
-        method: 'POST',
-    })
+    await confirmShipment(maDonHang, type)
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
@@ -22,46 +20,53 @@ async function onSubmit(maDonHang: string) {
 
 
 class ConfirmShipment extends React.Component {
-    maDonHang: string = '';
-
-    onChangeMaDonHang = (e: any) => {
-        this.maDonHang = e.target.value;
-    }
+    onFinish = (values: any) => {
+        console.log('Success:', values);
+        onSubmit(values.maDonHang, values.type);
+    };
 
     render() {
         return (
             <div>
-                <Typography.Title level={3}>Xác nhận hàng đã chuyển đến tay người nhận</Typography.Title>
-                <div style={{
-                    width: '50%',
-                    display: 'flex',
-                    alignContent: 'center',
-                    justifyContent: 'center',
-                }}>
-                    <Typography.Text style={{
-                        fontWeight: 'bold',
-                    }}>
-                        Mã đơn hàng:
+                <Typography.Title level={3}>Xác nhận hàng đã đến điểm tập kết</Typography.Title>
+                <Form onFinish={this.onFinish}>
+                    <Form.Item
+                        label="Mã đơn hàng"
+                        name="maDonHang"
+                        rules={[{ required: true, message: 'Vui lòng nhập mã đơn hàng' }]}
+
+                    >
                         <Input style={{
                             margin: '8px'
-                        }} onChange={this.onChangeMaDonHang}/>
-                    </Typography.Text>
-                </div>
+                        }}/>
+                    </Form.Item>
 
-                <div style={{
-                    width: '100%',
-                    display: 'flex',
-                    justifyContent: 'right',
-                    alignItems: 'center',
-                    marginTop: '16px',
-                }}>
-                    <Button type={"primary"} size={"large"}
-                            onClick={() => onSubmit(this.maDonHang)}
+                    <Form.Item
+                        label="Loại điểm"
+                        name="type"
+                        rules={[{ required: true, message: 'Vui lòng chọn loại điểm' }]}
                     >
-                        Xác nhận
-                    </Button>
-                    <div style={{ width: '20%' }}/>
-                </div>
+                        <Select>
+                            <Select.Option value="from-gather">Điểm tập kết</Select.Option>
+                            <Select.Option value="from-trans">Điểm giao dịch</Select.Option>
+                        </Select>
+                    </Form.Item>
+
+                    <Form.Item>
+                        <div style={{
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'right',
+                            alignItems: 'center',
+                            marginTop: '16px',
+                        }}>
+                            <Button type={"primary"} size={"large"} htmlType={"submit"}>
+                                Xác nhận
+                            </Button>
+                            <div style={{ width: '20%' }}/>
+                        </div>
+                    </Form.Item>
+                </Form>
             </div>
         );
     }

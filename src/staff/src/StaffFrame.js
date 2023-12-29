@@ -37,8 +37,6 @@ class StaffFrame extends React.Component {
 
     constructor({role, onLogout, props}) {
         super(props);
-        console.log(role);
-        console.log(onLogout);
         if (role !== undefined) {
             this.state.role = role;
         }
@@ -86,7 +84,7 @@ class StaffFrame extends React.Component {
         const {role} = this.state;
         return (
             <Layout>
-                <Header className="header">
+                <Header className="header" style={{height: "8vh"}}>
                     <Menu theme="dark" mode="horizontal" >
                         {
                             this.state.isSmallScreen ? (
@@ -103,12 +101,12 @@ class StaffFrame extends React.Component {
                 </Header>
                 <Layout>
                     {!this.state.isSmallScreen ? (
-                        <Sider width={200} >
+                        <Sider width={200} style={{minHeight: "91.5vh"}}>
                             <Menu
                                 mode="inline"
                                 defaultSelectedKeys={[this.state.selectedAction]}
                                 selectedKeys={[this.state.selectedAction]}
-                                style={{height: '100vh', borderRight: 0}}
+                                style={{height: "100%", borderRight: 0}}
                             >
                                 {this.menuItems}
                             </Menu>

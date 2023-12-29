@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import {Button, Divider, Form, Input, Popconfirm, Table} from 'antd';
+import {Divider, Form, Input, Table} from 'antd';
 const EditableContext = React.createContext(null);
 const EditableRow = ({...props }) => {
     const [form] = Form.useForm();
@@ -134,7 +134,7 @@ const ChargeTable = (props) => {
             ...row,
         });
         let keys = Object.keys(type);
-        let values = Object.values(type);
+        Object.values(type);
         let c = {};
         let sum = 0;
         newData.forEach((item, index) => {

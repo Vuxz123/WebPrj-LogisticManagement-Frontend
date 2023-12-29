@@ -4,9 +4,9 @@ import "./Partner.css";
 function Partner() {
     return (
         <section className={"partner-wrapper"}>
-            <div className={"partner-container flexCenter innerWidth paddings"}>
+            <div className={"partner-container flexCenter innerWidth paddings div"}>
                 <h1>Strategic Partner</h1>
-                <div>
+                <div className={"div"}>
                     <img src={"./abit.png"} alt={"Partner"}/>
                     <img src={"./funimart.png"} alt={"Partner"}/>
                     <img src={"./nhanhvn.png"} alt={"Partner"}/>

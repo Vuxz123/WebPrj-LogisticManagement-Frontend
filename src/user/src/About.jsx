@@ -19,7 +19,7 @@ function About() {
                 {/*left side*/}
                 <div className={"about-left"}>
                     <div className={"image-container"}>
-                        <img src={"./about-image.avif"} alt={"about-image"}/>
+                        <img src={"./about-image.avif"} alt={"about"}/>
                     </div>
                 </div>
 

@@ -1,5 +1,6 @@
 import './App.css';
 import {Header, About, Feature, Partner, Contact, Navbar, Footer} from './src'
+import {PopupInstance} from "./src/popup/Popup";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         </div>
         <Partner/>
         <Footer/>
+        {PopupInstance}
     </div>
   );
 }

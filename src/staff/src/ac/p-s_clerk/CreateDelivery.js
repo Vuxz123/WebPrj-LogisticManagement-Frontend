@@ -1,14 +1,12 @@
 import React from "react";
-import {API_URL} from "../../Util";
 import {toast} from "react-toastify";
 import {Button, Input, Typography} from "antd";
+import {createDelivery} from "../../api/psStaffApi";
 
 async function onSubmit(maDonHang: string) {
     console.log("submit");
 
-    await fetch(API_URL + '/shipments/' + maDonHang +'/create-delivery/', {
-        method: 'POST',
-    })
+    await createDelivery(maDonHang)
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);

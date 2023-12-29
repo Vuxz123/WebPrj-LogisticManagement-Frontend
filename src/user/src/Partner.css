@@ -1,9 +1,9 @@
-div {
+.div {
     justify-content: space-around;
     gap: 1rem;
 }
 
-div img {
+.div img {
     width: 20rem;
 }
 

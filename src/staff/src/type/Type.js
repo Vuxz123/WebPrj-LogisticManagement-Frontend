@@ -1,11 +1,11 @@
 interface ShipmentProf {
     id?: string,
-    sender: {
+    senderInfo: {
         name: string,
         phone: string,
         address: string,
     },
-    receiver: {
+    receiverInfo: {
         name: string,
         phone: string,
         address: string,
@@ -45,12 +45,12 @@ interface ShipmentProf {
 class Shipment implements ShipmentProf{
     constructor() {
         this.id = null;
-        this.sender = {
+        this.senderInfo = {
             name: '',
             phone: '',
             address: '',
         };
-        this.receiver = {
+        this.receiverInfo = {
             name: '',
             phone: '',
             address: '',
@@ -93,11 +93,11 @@ class Shipment implements ShipmentProf{
     }
 
     checkValidSubmit(): boolean {
-        if (this.sender.name === '' || this.sender.phone === '' || this.sender.address === '') {
+        if (this.senderInfo.name === '' || this.senderInfo.phone === '' || this.senderInfo.address === '') {
             console.log('sender')
             return false;
         }
-        if (this.receiver.name === '' || this.receiver.phone === '' || this.receiver.address === '') {
+        if (this.receiverInfo.name === '' || this.receiverInfo.phone === '' || this.receiverInfo.address === '') {
             console.log('receiver')
             return false;
         }

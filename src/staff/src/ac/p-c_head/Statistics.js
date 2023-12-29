@@ -1,7 +1,5 @@
 import React from "react";
-import {API_URL} from "../../Util";
-import {toast} from "react-toastify";
-import {Button, Divider, Input, Spin, Table, Typography} from "antd";
+import {Button, Divider, Spin, Table, Typography} from "antd";
 
 class Report extends React.Component {
 

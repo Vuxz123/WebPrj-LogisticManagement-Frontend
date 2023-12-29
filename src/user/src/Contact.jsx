@@ -86,7 +86,7 @@ function Contact() {
                 {/*right side*/}
                 <div className={"contact-right"}>
                     <div className={"image-container"}>
-                        <img src={"./contact-image.jpeg"} alt={"contact image"}/>
+                        <img src={"./contact-image.jpeg"} alt={"contact"}/>
                     </div>
                 </div>
             </div>
