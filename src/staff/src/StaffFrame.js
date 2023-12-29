@@ -4,6 +4,8 @@ import ActionContentProvider from "./ActionContentProvider";
 import resolveName from "./StaffNameResolver";
 import {ReactNode} from "react";
 import {LogoutOutlined, MenuOutlined} from "@ant-design/icons";
+import logout from "./api/logoutApi";
+import {toast} from "react-toastify";
 
 const {Header, Sider, Content} = Layout;
 
@@ -15,8 +17,6 @@ class StaffFrame extends React.Component {
         role: 'p-c_head', // this is just an example, you should get the current user's role from backend
         selectedAction: 0,
     };
-
-    menuSelected : number = 1;
 
     componentDidMount() {
         const media = window.matchMedia('(max-width: 800px)');
@@ -35,11 +35,16 @@ class StaffFrame extends React.Component {
         });
     };
 
-    constructor({role, props}) {
+    constructor({role, onLogout, props}) {
         super(props);
+        console.log(role);
+        console.log(onLogout);
         if (role !== undefined) {
             this.state.role = role;
         }
+        this.onLogout = () => {
+            onLogout();
+        };
         this.getMenuContent(this.state.role, this.handleMenuClick);
     }
 
@@ -63,9 +68,14 @@ class StaffFrame extends React.Component {
         this.renderActionContent();
     };
 
-    handleLogout() {
+    temp = () => {
+        toast.success("Đăng xuất thành công");
+        this.onLogout();
+    };
 
-    }
+    handleLogout = () => {
+        logout().then(this.temp); // Use arrow function for correct `this` binding
+    };
 
     renderActionContent(isSmallScreen) : ReactNode {
         const ActionContent = this.provider.renderActionContent(this.state.role, this.state.selectedAction);

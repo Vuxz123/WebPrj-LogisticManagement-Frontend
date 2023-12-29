@@ -7,15 +7,9 @@
       "node": "AdminDashboard"
     },
     {
-      "key": "settings",
-      "name": "Settings",
-      "icon": "fa fa-dashboard",
-      "node": "AdminSetting"
-    },
-    {
-      "key": "permissions",
-      "name": "Permissions",
-      "icon": "fa fa-dashboard"
+      "key": "account_management",
+      "name": "Account Management",
+      "node": "AccountManagement"
     }
   ],
 

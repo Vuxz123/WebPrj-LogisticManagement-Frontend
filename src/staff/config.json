@@ -1,0 +1,6 @@
+{
+  "URL": "http://localhost:3000",
+  "AUTH_LOGIN_PATH": "/auth/login",
+  "AUTH_LOGOUT_PATH": "/auth/logout",
+  "AUTH_REGISTER_PATH": "/auth/register"
+}

@@ -55,6 +55,10 @@ class ActionContentProvider {
 
     importActionContentModule(role : String, selectedAction : String) : NodeModule {
         const features = this.staffFeatures[role];
+        if(features === undefined) {
+            console.log('WARNING: the role is undefined: \'' + role + '\'')
+            return modules.get('./PlaceHolder.js');
+        }
         const className : String = features.find((feature) => feature.key === selectedAction).node;
         if(className === undefined) {
             console.log('WARNING: the node is undefined of action : \'' + selectedAction + '\' for role: \'' + role + '\'')

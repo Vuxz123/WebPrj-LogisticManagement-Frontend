@@ -1,54 +1,33 @@
 import React from "react";
-import {Button, Form, Input, Typography} from "antd";
+import {Button, Form, Input, Spin, Typography} from "antd";
 import {InfoCircleOutlined} from "@ant-design/icons";
-
-async function onSubmit(account) {
-    console.log("submit");
-    console.log(account);
-
-    // await fetch(API_URL + '/shipments/' + maDonHang +'/create-shipment/', {
-    //     method: 'POST',
-    // })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         console.log('Success:', data);
-    //         toast.success("Xác nhận thành công");
-    //     })
-    //     .catch((error) => {
-    //         console.error('Error:', error);
-    //         toast.error("Xác nhận thất bại");
-    //     });
-}
+import {submitRegister} from "../../api/accountCreationApi";
 
 
 class ConfirmShipment extends React.Component {
-    account : {
-        username: string,
-        password: string,
-        repassword: string,
+    state : {
+        loading: boolean,
     } = {
-        username: '',
-        password: '',
-        repassword: '',
-    };
+        loading: false,
+    }
 
-    keys = Object.keys(this.account);
-
-    onChange = (_, all) => {
-        this.keys.forEach((key) => {
-            this.account[key] = all.value;
+    onFinished = (values) => {
+        console.log(values);
+        this.setState({ loading: true });
+        submitRegister(values).then(() => {
+            this.setState({ loading: false });
         });
-        console.log(this.account)
     }
 
     render() {
         return (
-            <div>
+            <Spin spinning={this.state.loading}>
                 <Typography.Title level={3}>Tạo tài khoản</Typography.Title>
                 <Form onValuesChange={this.onChange}
                       labelCol={{ span: 8 }}
                       wrapperCol={{ span: 16 }}
                       style={{ maxWidth: 600 }}
+                      onFinish={this.onFinished}
                 >
                     <Form.Item
                         label="Tên đăng nhập"
@@ -96,10 +75,6 @@ class ConfirmShipment extends React.Component {
                         }}>
                             <Button type={"primary"} size={"large"}
                                     htmlType={"submit"}
-                                    onSubmit={() => {
-                                        console.log(this.complete)
-                                        onSubmit(this.account)
-                                    }}
                             >
                                 Xác nhận
                             </Button>
@@ -108,7 +83,7 @@ class ConfirmShipment extends React.Component {
                     </Form.Item>
                 </Form>
 
-            </div>
+            </Spin>
         );
     }
 }
